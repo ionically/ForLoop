@@ -7,49 +7,45 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate {
     var num: String = "chandni"
-    
-    
-    
-    
-    @IBOutlet weak var label4: UILabel!
-    @IBOutlet weak var label1: UILabel!
-    
-    @IBOutlet weak var label2: UILabel!
-    
-    @IBOutlet weak var label3: UILabel!
+    var arry = ["I am a girl My name is chandni","I am a girl My name is chandni","I am a girl My name is chandni"]
+    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var buttonOutlet: UIButton!
     
-    
-    
     @IBAction func buttonAction(_ sender: Any) {
-        
-        if(true){
-            
-            label1.isHidden = true
-            label2.isHidden = true
-            label3.isHidden = true
-            label4.isHidden = true
-           
-        }
-        
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.delegate = self
+        tableView.dataSource = self // row
+        //tableView.separatorColor = .clear
+        tableView.backgroundColor = .white
+       
         show()
         // Do any additional setup after loading the view.
     }
     func show() {
-        label1.isHidden = false
-        label2.isHidden = false
-        label3.isHidden = false
-        label4.isHidden = false
-        label1.isEnabled = true
-        label2.isEnabled = true
-        label3.isEnabled = true
-        label4.isEnabled = true
+    
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell") as! TableViewCell
+
+            // Configure YourCustomCell using the outlets that you've defined.
+        cell.label1.text = arry[indexPath.row]
+        cell.selectionStyle = UITableViewCell.SelectionStyle.none;
+            return cell
         
     }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return arry.count
+    }
 }
-
+class TableViewCell: UITableViewCell {
+    
+    
+    @IBOutlet weak var label1: UILabel!
+    
+    
+}
